@@ -31,11 +31,17 @@ class Instructor extends Person {
   }
 
   gradeCounter(student) {
-    const randomNum = Math.floor(Math.random() *  30 + 1);
+    const randomNum = Math.floor(Math.random() * 10 + 1);
+
     return {
       increment: () => console.log(`${student.name}'s grade was ${student.grade}. After adding ${randomNum}, points are ${parseInt(student.grade + randomNum)}!`),
       decrement: () => console.log(`${student.name}'s grade was ${student.grade}. After subtracting of ${randomNum}, remaining points are ${parseInt(student.grade - randomNum)}!`)
     }
+
+    // return {
+    //    increment: () => console.log(`${parseInt(student.grade + randomNum)}`),
+    //    decrement: () => console.log(`${parseInt(student.grade - randomNum)}`) 
+    // }
   }
 }
 
@@ -57,6 +63,14 @@ class Student extends Person {
   }
   sprintChallenge(subject) {
     return console.log(`${this.name} has begun sprint challenge on ${subject}`);
+  }
+
+  graduate(student) {
+    if (student.grade > 70) {
+      console.log(`Congratulations! ${student.name}, you've graduated!`);
+    } else {
+      console.log(`Sorry ${student.name}. You don't have enough points to graduate`);
+    }
   }
 }
 
@@ -96,13 +110,13 @@ const keiran = new Instructor({
 const zaur = new Student({
   name: 'Zaur',
   favSubjects: ['Html', 'CSS', 'JavaScript'],
-  grade: 80
+  grade: parseInt([20])
 });
 
 const kolyan = new Student({
   name: 'Kolyan',
   favSubjects: ['Node.js', 'LESS', 'Python'],
-  grade: 50
+  grade: parseInt([10])
 });
 
 const abdul = new ProjectManagers({
@@ -137,6 +151,7 @@ zaur.sprintChallenge('Node.js');
 console.log(kolyan.name);
 console.log(`Kolyan's favourite subjects are ${kolyan.favSubjects}`);
 console.log(`Zaur's grade: ${zaur.grade}, Kolyan's grade: ${kolyan.grade}`)
+zaur.graduate(zaur);
 
 // PM LOGS
 console.log(`//////////PM LOGS START///////////`)
@@ -146,4 +161,3 @@ catlin.standUp('slack');
 catlin.debugCode(kolyan, 'Python');
 abdul.gradeCounter(kolyan).increment();
 abdul.gradeCounter(kolyan).decrement();
-
