@@ -10,6 +10,12 @@ class Person {
   }
 }
 
+/*
+Now that our students have a grade build out a method on the Instructor 
+(this will be used by BOTH instructors and PM's) 
+that will randomly add or subtract points to a student's grade. Math.random will help.
+*/
+
 class Instructor extends Person {
   constructor(props) {
     super(props);
@@ -23,6 +29,14 @@ class Instructor extends Person {
   grade(student, subject) {
     return `${student.name} receives a perfect score on ${subject}`
   }
+
+  gradeCounter(student) {
+    const randomNum = Math.floor(Math.random() *  30 + 1);
+    return {
+      increment: () => console.log(`${student.name}'s grade was ${student.grade}. After adding ${randomNum}, points are ${parseInt(student.grade + randomNum)}!`),
+      decrement: () => console.log(`${student.name}'s grade was ${student.grade}. After subtracting of ${randomNum}, remaining points are ${parseInt(student.grade - randomNum)}!`)
+    }
+  }
 }
 
 class Student extends Person {
@@ -31,7 +45,7 @@ class Student extends Person {
     this.previousBackground = props.previousBackground;
     this.className = props.className;
     this.favSubjects = props.favSubjects;
-    this.grade = props.grade; 
+    this.grade = props.grade;
   }
   listsSubjects() {
     this.favSubjects.forEach((e) => {
@@ -82,13 +96,13 @@ const keiran = new Instructor({
 const zaur = new Student({
   name: 'Zaur',
   favSubjects: ['Html', 'CSS', 'JavaScript'],
-  grade: 99
+  grade: 80
 });
 
 const kolyan = new Student({
   name: 'Kolyan',
   favSubjects: ['Node.js', 'LESS', 'Python'],
-  grade: 55
+  grade: 50
 });
 
 const abdul = new ProjectManagers({
@@ -110,6 +124,8 @@ console.log(fred.specialty);
 console.log(fred.demo('HTML'));
 console.log(fred.grade(zaur, 'CSS'));
 console.log(`${keiran.name} likes teaching ${keiran.specialty}`);
+fred.gradeCounter(zaur).increment();
+fred.gradeCounter(zaur).decrement();
 
 // STUDENT LOGS
 console.log(`/////////STUDENT LOGS START//////////`)
@@ -128,3 +144,6 @@ abdul.standUp('slack');
 abdul.debugCode(zaur, 'SQL');
 catlin.standUp('slack');
 catlin.debugCode(kolyan, 'Python');
+abdul.gradeCounter(kolyan).increment();
+abdul.gradeCounter(kolyan).decrement();
+
