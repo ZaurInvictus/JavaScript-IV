@@ -178,16 +178,23 @@ Prototype Refactor
 class Zaur extends Person {
   constructor(attributes) {
     super(attributes);
+    this.color = attributes.color;
+  }
+  tells() {
+    return 'HELLLOO'
   }
 }
 
-const zaur = new Person({
+const zaur = new Zaur({
  name: 'Zaur',
- age: '35'
+ age: '35',
+ color: 'red'
 });
 
 
 console.log(zaur.name);
 console.log(zaur.age);
 console.log(zaur.speak());
+console.log(zaur.tells());
+console.log(zaur.color);
 
